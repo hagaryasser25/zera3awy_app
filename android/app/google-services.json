@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "190463423718",
+    "project_id": "zera3awy-app",
+    "storage_bucket": "zera3awy-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190463423718:android:5f99bea5eef04eb3edf727",
+        "android_client_info": {
+          "package_name": "com.example.zera3awy_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWdXm-XxiPJaWgVLij4ONXRaKsflmigj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
