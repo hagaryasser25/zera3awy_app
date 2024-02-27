@@ -159,6 +159,7 @@ class _FarmCartState extends State<FarmCart> {
                                                 ),
                                                 child: Text('شراء الأن'),
                                                 onPressed: () async {
+                                                  /*
                                                   int? price =
                                                       cartList[index].price;
                                                   int? total =
@@ -308,6 +309,7 @@ class _FarmCartState extends State<FarmCart> {
                                                                   ),
                                                                 ],
                                                               ));
+                                                              */
                                                 },
                                               ),
                                             ),

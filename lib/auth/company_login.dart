@@ -26,174 +26,190 @@ class _CompanyLoginState extends State<CompanyLogin> {
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         builder: (context, child) => Scaffold(
-          body: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 100.h),
-                child: Center(
-                    child: Image.asset(
-                  "assets/images/logo.jpg",
-                  height: 150.h,
-                  width: 150.w,
-                )),
-              ),
-              Text(
-                "زرعاوى",
-                style: TextStyle(
-                    color: HexColor("#2dda9f"),
-                    fontFamily: 'Lemonada',
-                    fontSize: 20),
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 10.w),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "تسجيل دخول",
-                    style: TextStyle(
-                      color: HexColor("#2dda9f"),
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 10.w, left: 10.w),
-                child: SizedBox(
-                  height: 65.h,
-                  child: TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: HexColor('#2dda9f'), width: 2.0),
-                      ),
-                      border: OutlineInputBorder(),
-                      hintText: 'البريد الألكترونى',
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 10.w, left: 10.w),
-                child: SizedBox(
-                  height: 65.h,
-                  child: TextField(
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: HexColor('#2dda9f'), width: 2.0),
-                      ),
-                      border: OutlineInputBorder(),
-                      hintText: 'كلمة المرور',
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 10.w, left: 10.w),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.tightFor(
-                      width: double.infinity, height: 65.h),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: HexColor("#2dda9f"),
-                    ),
-                    child: Text(
-                      'تسجيل الدخول',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () async {
-                      var email = emailController.text.trim();
-                      var password = passwordController.text.trim();
-
-                      if (email.isEmpty || password.isEmpty) {
-                        MotionToast(
-                                primaryColor: Colors.blue,
-                                width: 300,
-                                height: 50,
-                                position: MotionToastPosition.center,
-                                description: Text("please fill all fields"))
-                            .show(context);
-
-                        return;
-                      }
-                      ProgressDialog progressDialog = ProgressDialog(context,
-                          title: Text('Logging In'),
-                          message: Text('Please Wait'));
-                      progressDialog.show();
-
-                      try {
-                        FirebaseAuth auth = FirebaseAuth.instance;
-                        UserCredential userCredential =
-                            await auth.signInWithEmailAndPassword(
-                                email: email, password: password);
-
-                        if (userCredential.user != null) {
-                          progressDialog.dismiss();
-                          Navigator.pushReplacementNamed(context, CompanyHome.routeName);
-                        }
-                      } on FirebaseAuthException catch (e) {
-                        progressDialog.dismiss();
-                        if (e.code == 'user-not-found') {
-                          MotionToast(
-                                  primaryColor: Colors.blue,
-                                  width: 300,
-                                  height: 50,
-                                  position: MotionToastPosition.center,
-                                  description: Text("user not found"))
-                              .show(context);
-                          return;
-                        } else if (e.code == 'wrong-password') {
-                          MotionToast(
-                                  primaryColor: Colors.blue,
-                                  width: 300,
-                                  height: 50,
-                                  position: MotionToastPosition.center,
-                                  description: Text("wrong email or password"))
-                              .show(context);
-
-                          return;
-                        }
-                      } catch (e) {
-                        MotionToast(
-                                primaryColor: Colors.blue,
-                                width: 300,
-                                height: 50,
-                                position: MotionToastPosition.center,
-                                description: Text("something went wrong"))
-                            .show(context);
-                        print(e);
-
-                        progressDialog.dismiss();
-                      }
-                    },
-                  ),
-                ),
-              ),
-
-              TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, SignUpPage.routeName);
-                  },
-                  child: Text(
-                    'انشاء حساب',
-                    style: TextStyle(color: HexColor("#5b5b5b")),
+          body: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 100.h),
+                  child: Center(
+                      child: Image.asset(
+                    "assets/images/logo.jpg",
+                    height: 150.h,
+                    width: 150.w,
                   )),
-            ],
+                ),
+                Text(
+                  "زرعاوى",
+                  style: TextStyle(
+                      color: HexColor("#2dda9f"),
+                      fontFamily: 'Lemonada',
+                      fontSize: 20),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10.w),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "تسجيل دخول",
+                      style: TextStyle(
+                        color: HexColor("#2dda9f"),
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 10.w, left: 10.w),
+                  child: SizedBox(
+                    height: 65.h,
+                    child: TextField(
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: HexColor('#2dda9f'), width: 2.0),
+                        ),
+                        border: OutlineInputBorder(),
+                        hintText: 'البريد الألكترونى',
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 10.w, left: 10.w),
+                  child: SizedBox(
+                    height: 65.h,
+                    child: TextField(
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: HexColor('#2dda9f'), width: 2.0),
+                        ),
+                        border: OutlineInputBorder(),
+                        hintText: 'كلمة المرور',
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 10.w, left: 10.w),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.tightFor(
+                        width: double.infinity, height: 65.h),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: HexColor("#2dda9f"),
+                      ),
+                      child: Text(
+                        'تسجيل الدخول',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () async {
+                        var email = emailController.text.trim();
+                        var password = passwordController.text.trim();
+
+                        if (email.isEmpty || password.isEmpty) {
+                          MotionToast(
+                                  primaryColor: Colors.blue,
+                                  width: 300,
+                                  height: 50,
+                                  position: MotionToastPosition.center,
+                                  description: Text("please fill all fields"))
+                              .show(context);
+
+                          return;
+                        }
+                        ProgressDialog progressDialog = ProgressDialog(context,
+                            title: Text('Logging In'),
+                            message: Text('Please Wait'));
+                        progressDialog.show();
+
+                        try {
+                          FirebaseAuth auth = FirebaseAuth.instance;
+                          UserCredential userCredential =
+                              await auth.signInWithEmailAndPassword(
+                                  email: email, password: password);
+
+                          if (userCredential.user != null &&
+                              FirebaseAuth.instance.currentUser!.displayName ==
+                                  "شركة") {
+                            progressDialog.dismiss();
+                            Navigator.pushReplacementNamed(
+                                context, CompanyHome.routeName);
+                          } else {
+                            MotionToast(
+                                    primaryColor: Colors.blue,
+                                    width: 300,
+                                    height: 50,
+                                    position: MotionToastPosition.center,
+                                    description: Text("لا يمكنك الدخول"))
+                                .show(context);
+
+                            return;
+                          }
+                        } on FirebaseAuthException catch (e) {
+                          progressDialog.dismiss();
+                          if (e.code == 'user-not-found') {
+                            MotionToast(
+                                    primaryColor: Colors.blue,
+                                    width: 300,
+                                    height: 50,
+                                    position: MotionToastPosition.center,
+                                    description: Text("user not found"))
+                                .show(context);
+                            return;
+                          } else if (e.code == 'wrong-password') {
+                            MotionToast(
+                                    primaryColor: Colors.blue,
+                                    width: 300,
+                                    height: 50,
+                                    position: MotionToastPosition.center,
+                                    description:
+                                        Text("wrong email or password"))
+                                .show(context);
+
+                            return;
+                          }
+                        } catch (e) {
+                          MotionToast(
+                                  primaryColor: Colors.blue,
+                                  width: 300,
+                                  height: 50,
+                                  position: MotionToastPosition.center,
+                                  description: Text("something went wrong"))
+                              .show(context);
+                          print(e);
+
+                          progressDialog.dismiss();
+                        }
+                      },
+                    ),
+                  ),
+                ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, SignUpPage.routeName);
+                    },
+                    child: Text(
+                      'انشاء حساب',
+                      style: TextStyle(color: HexColor("#5b5b5b")),
+                    )),
+              ],
+            ),
           ),
         ),
       ),
