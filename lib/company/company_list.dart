@@ -182,7 +182,8 @@ class _CompanyListState extends State<CompanyList> {
                 },
               ),
             ),
-          ])),
+          ])
+          ),
         ));
   }
 }

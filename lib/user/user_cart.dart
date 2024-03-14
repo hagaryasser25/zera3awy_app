@@ -160,7 +160,7 @@ class _UserCartState extends State<UserCart> {
                                                 ),
                                                 child: Text('شراء الأن'),
                                                 onPressed: () async {
-                                                  /*
+                                                  
                                                   int? price =
                                                       cartList[index].price;
                                                   int? total =
@@ -310,7 +310,7 @@ class _UserCartState extends State<UserCart> {
                                                                   ),
                                                                 ],
                                                               ));
-                                                              */
+                                                              
                                                 },
                                               ),
                                             ),

@@ -43,7 +43,6 @@ class _UserHomeState extends State<UserHome> {
     final snapshot = await base.get();
     setState(() {
       currentUser = Users.fromSnapshot(snapshot);
-      print(currentUser.fullName);
     });
   }
 
@@ -119,11 +118,12 @@ class _UserHomeState extends State<UserHome> {
                                       child: ListTile(
                                         onTap: () {
                                           Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return UserList(
-                                    name: '${currentUser.fullName}',
-                                  );
-                                }));
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return UserList(
+                                              name: '${currentUser.fullName}',
+                                            );
+                                          }));
                                         },
                                         title: Text("مشترياتى"),
                                         leading: Icon(Icons.list_alt),

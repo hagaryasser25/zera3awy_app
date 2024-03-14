@@ -146,7 +146,7 @@ class _CompanyLoginState extends State<CompanyLogin> {
 
                           if (userCredential.user != null &&
                               FirebaseAuth.instance.currentUser!.displayName ==
-                                  "شركة") {
+                                  "شركة اسمدة") {
                             progressDialog.dismiss();
                             Navigator.pushReplacementNamed(
                                 context, CompanyHome.routeName);
